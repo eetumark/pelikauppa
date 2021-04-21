@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Game Corner</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+</head>
+<body>
+	<h1>Edit Game</h1>
+	<table>
+	<tr>
+		
+	</tr>
+		<div class="col-md-4">
+
+		
+		<form th:object="${game}" th:action="@{../save}" action="#" method="post">
+		<input type="hidden" th:field="*{id}" class="form-control"/>
+			<label for="ttl">Title</label>
+			<input type="text" th:field="*{title}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="pltfrm">Platform</label>
+			<input type="text" th:field="*{platform}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="pblshr">Publisher</label>
+			<input type="text" th:field="*{publisher}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="dev">Developer</label>
+			<input type="text" th:field="*{developer}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="avlb">Availability</label>
+			<input type="text" th:field="*{availability}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="year">Year</label>
+			<input type="text" th:field="*{year}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="prc">Price</label>
+			<input type="text" th:field="*{price}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="gnr">Genre</label>
+			<select id="gnrlist" th:field="*{genre}" class="form-control">
+				<option th:each="genre : ${genres}" th:value="${genre.genreid}" th:text="${genre.name}"></option>
+				</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		<input type="submit" value="Save" class="btn btn-primary"></input>
+		</form>
+		
+		</div>
+	</table>
+</body>
+</html>

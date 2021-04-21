@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Bookstore</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+</head>
+<body>
+	<h1>List of Categories</h1>
+	<table class="table table-striped">
+	<tr>
+		<th>Categories</th>
+		
+	</tr>
+
+		<tr th:each="genre : ${genres}">
+			<td th:text="${genre.name}"></td>
+			<td><a th:href="@{/deletegenre/{genreid}(id=${genre.genreid})}" class="btn btn-danger">Delete</a></td>
+			<td><a th:href="@{/editgenre/{genreid}(id=${genre.genreid})}" class="btn btn-primary">Edit</a></td>
+		</tr>
+	</table>
+	<a href="/addgenre" class="btn btn-success">Add Category</a>
+	
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+<title>Game Corner</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+</head>
+<body>
+<h1>Games</h1>
+<div class="container">
+	
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+			</form>
+	</div>
+</div>
+
+
+
+
+	<table class="table table-striped">
+	<tr>
+		<th>Title</th>
+		<th>Platform</th>
+		<th>Publisher</th>
+		<th>Developer</th>
+		<th>Availability</th>
+		<th>Year</th>
+		<th>Price</th>
+		<th>Genre</th>
+		<th sec:authorize="hasAuthority('ADMIN')"></th>
+		
+	</tr>
+
+		<tr th:each="game : ${games}">
+			<td th:text="${game.title}"></td> 
+			<td th:text="${game.platform}"></td>
+			<td th:text="${game.publisher}"></td>
+			<td th:text="${game.developer}"></td>
+			<td>
+			<span th:if="${game.availability} == true">Available</span>
+    		<span th:unless="${game.availability} == true">Out of stock</span>
+			</td>
+			<td th:text="${game.year}"></td>
+			<td th:text="${game.price}"></td>
+			<td th:text="${game.genre.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${game.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${game.id})}" class="btn btn-primary">Edit</a></td>
+			<td><a th:href="@{/buy/{id}(id=${game.id})}" class="btn btn-secondary">Buy</a></td>
+		</tr>
+	</table>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/add" class="btn btn-success">Add Game</a>
+	
+</body>
+</html>
